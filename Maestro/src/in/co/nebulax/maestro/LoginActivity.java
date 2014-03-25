@@ -3,14 +3,11 @@ package in.co.nebulax.maestro;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockActivity;
-
-public class LoginActivity extends SherlockActivity implements OnClickListener {
+public class LoginActivity extends MyActivity {
 
 	EditText usrName;
 	EditText usrPass;
