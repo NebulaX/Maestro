@@ -8,6 +8,9 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -29,10 +32,13 @@
         </activity>
         <activity
             android:name="in.co.nebulax.maestro.RegistrationActivity"
-            android:label="@string/app_name" 
-            android:windowSoftInputMode="stateHidden">
-            <!-- The final line is used to hide the keyboard while
-            entering any activity -->
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" >
+
+            <!--
+            The final line is used to hide the keyboard while
+            entering any activity
+            -->
         </activity>
     </application>
 
