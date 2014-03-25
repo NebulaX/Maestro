@@ -4,5 +4,7 @@
     <string name="app_name">Maestro</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="APP_ID">0cWaJbJ9XGbvcrGCLIkYUQbEzbEqnwFE6gRZ4cxg</string>
+    <string name="CLIENT_KEY">9JZBLuJhixnRtOHkPL5ybx4RRMTsc2VOmr2Qh0yd</string>
 
 </resources>
