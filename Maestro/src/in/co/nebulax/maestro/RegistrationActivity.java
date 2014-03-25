@@ -60,6 +60,9 @@ public class RegistrationActivity extends SherlockActivity implements
 			// Send request to register
 		break;	
 		case R.id.tv_login_redirect :
+			try{
+				super.finish();
+			}catch(Exception e){}
 			finish();
 			Intent i = new Intent(this , LoginActivity.class);
 			startActivity(i);

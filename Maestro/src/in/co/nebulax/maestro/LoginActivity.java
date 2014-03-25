@@ -49,6 +49,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener {
 			//Add code to send request for login
 			break;
 		case R.id.tv_reg_redirect :
+			finish();
 			Intent intent = new Intent(this , RegistrationActivity.class);
 			startActivity(intent);
 			break;
