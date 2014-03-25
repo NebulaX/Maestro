@@ -47,9 +47,11 @@ public class LoginActivity extends SherlockActivity implements OnClickListener {
 		switch(v.getId()){
 		case R.id.btn_login:
 			//Add code to send request for login
+			break;
 		case R.id.tv_reg_redirect :
 			Intent intent = new Intent(this , RegistrationActivity.class);
 			startActivity(intent);
+			break;
 		}
 
 	}
