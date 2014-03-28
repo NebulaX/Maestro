@@ -21,7 +21,7 @@ import com.parse.ParseUser;
 
 public class RegistrationActivity extends MyActivity {
 
-	EditText name, email, pass, confirmpass;
+	EditText name, email, pass, confirmpass, mobile;
 	CheckBox student, maestro;
 	Button register, btn_location;
 	TextView redirect_login, tv_location;
@@ -66,6 +66,7 @@ public class RegistrationActivity extends MyActivity {
 		spinner_from = (Spinner) findViewById(R.id.spinner_maestro_from);
 		spinner_to = (Spinner) findViewById(R.id.spinner_maestro_to);
 		spinner_subject = (Spinner) findViewById(R.id.spinner_maestro_subject);
+		mobile = (EditText) findViewById(R.id.reg_mobile);
 	}
 
 	private void setFields() {
@@ -159,8 +160,9 @@ public class RegistrationActivity extends MyActivity {
 		String sEmail = email.getText().toString();
 		String sPass = pass.getText().toString();
 		String sCPass = confirmpass.getText().toString();
+		String sMobile = mobile.getText().toString();
 
-		if (sname.equalsIgnoreCase("") || !sname.matches("[a-zA-Z]")) {
+		if (sname.equalsIgnoreCase("") || !sname.matches("^[A-Za-z ]+$")) {
 			Toast.makeText(RegistrationActivity.this,
 					"Please enter a valid name", Toast.LENGTH_SHORT).show();
 			return false;
@@ -171,11 +173,18 @@ public class RegistrationActivity extends MyActivity {
 			return false;
 		} else if (sPass.equalsIgnoreCase("")) {
 			Toast.makeText(RegistrationActivity.this,
-					"Please enter valid password", Toast.LENGTH_SHORT).show();
+					"Password should not be left blank", Toast.LENGTH_SHORT)
+					.show();
 			return false;
 		} else if (!sPass.equals(sCPass)) {
 			Toast.makeText(RegistrationActivity.this, "Password Mismatch",
 					Toast.LENGTH_SHORT).show();
+			return false;
+		} else if (sMobile.equalsIgnoreCase("")
+				|| !sMobile
+						.matches("^((\\+){0,1}91(\\s){0,1}(\\-){0,1}(\\s){0,1}){0,1}9[0-9](\\s){0,1}(\\-){0,1}(\\s){0,1}[1-9]{1}[0-9]{7}$")) {
+			Toast.makeText(RegistrationActivity.this,
+					"Enter proper mobile number", Toast.LENGTH_SHORT).show();
 			return false;
 		} else {
 			return true;
