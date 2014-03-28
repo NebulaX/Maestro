@@ -37,7 +37,7 @@ public class RegistrationActivity extends MyActivity implements
 
 	EditText name, email, pass, confirmpass, mobile;
 	CheckBox student, maestro;
-	Button register, btn_location;
+	Button register;
 	TextView redirect_login, tv_location;
 	boolean isRegSuccess = true;
 
@@ -62,6 +62,7 @@ public class RegistrationActivity extends MyActivity implements
 
 		initialiseFields();
 		setFields();
+		getLocation();
 	}
 
 	public void initialiseFields() {
@@ -76,7 +77,6 @@ public class RegistrationActivity extends MyActivity implements
 		redirect_login = (TextView) findViewById(R.id.tv_login_redirect);
 		stuClass = (LinearLayout) findViewById(R.id.layout_student_class);
 		maestroDetails = (LinearLayout) findViewById(R.id.layout_maestro_details);
-		btn_location = (Button) findViewById(R.id.btn_detectLocation);
 		tv_location = (TextView) findViewById(R.id.tv_location);
 		spinner_class = (Spinner) findViewById(R.id.spinner_student_class);
 		spinner_from = (Spinner) findViewById(R.id.spinner_maestro_from);
@@ -88,7 +88,6 @@ public class RegistrationActivity extends MyActivity implements
 	private void setFields() {
 		register.setOnClickListener(this);
 		redirect_login.setOnClickListener(this);
-		btn_location.setOnClickListener(this);
 
 		student.setOnCheckedChangeListener(this);
 		maestro.setOnCheckedChangeListener(this);
@@ -113,10 +112,6 @@ public class RegistrationActivity extends MyActivity implements
 
 			case R.id.tv_login_redirect:
 				showLoginActivity();
-				break;
-
-			case R.id.btn_detectLocation:
-				getLocation();
 				break;
 			}
 		} else {
@@ -306,7 +301,7 @@ public class RegistrationActivity extends MyActivity implements
 			if (location != null) {
 				onLocationChanged(location);
 			}
-			locationManager.requestLocationUpdates(provider, 20000, 0, this);
+			locationManager.requestLocationUpdates(provider, 20000, 100000, this);
 		}
 	}
 
@@ -369,14 +364,8 @@ public class RegistrationActivity extends MyActivity implements
 
 			if (addresses != null && addresses.size() > 0) {
 				Address address = addresses.get(0);
-
-				addressText = String.format(
-						"%s, %s",
-						address.getMaxAddressLineIndex() > 0 ? 
-								address.getAddressLine(0) : "", 
-								address.getLocality());
+				addressText = address.getLocality();
 			}
-
 			return addressText;
 		}
 
