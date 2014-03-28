@@ -11,6 +11,7 @@ import com.parse.ParseUser;
 
 public class HomeScreen extends MyActivity {
 
+	ParseUser currentUser;
 	TextView usrName;
 
 	Button logout;
@@ -20,13 +21,23 @@ public class HomeScreen extends MyActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		initialiseFields();
+		setFields();
+		
+		usrName.setText(currentUser.getUsername());
+	}
+	
+	public void initialiseFields(){
+
 		usrName = (TextView) findViewById(R.id.tv_usrName);
 		logout = (Button) findViewById(R.id.btn_logout);
-		ParseUser currentUser = ParseUser.getCurrentUser();
+		currentUser = ParseUser.getCurrentUser();
+		
+	}
+	
+	public void setFields(){
 
-		usrName.setText(currentUser.getUsername());
-
-		logout.setOnClickListener(this);
+		logout.setOnClickListener(this);		
 	}
 
 	@Override
