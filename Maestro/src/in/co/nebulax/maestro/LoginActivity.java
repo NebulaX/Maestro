@@ -1,8 +1,5 @@
 package in.co.nebulax.maestro;
 
-import com.parse.ParseException;
-import com.parse.ParseUser;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,6 +11,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.ParseUser;
 
 public class LoginActivity extends MyActivity {
 
@@ -50,34 +49,40 @@ public class LoginActivity extends MyActivity {
 		reg_redirect.setOnClickListener(this);
 		forgotPass.setOnClickListener(this);
 		rememberMe.setOnCheckedChangeListener(this);
-		
+
 		// Setting initial state of checkbox
-		
-		if(isRemembered == true)
+
+		if (isRemembered == true)
 			rememberMe.setChecked(true);
-		else 
+		else
 			rememberMe.setChecked(false);
 	}
 
 	@Override
 	public void onClick(View v) {
 
-		switch (v.getId()) {
-		case R.id.btn_login:
-			// Add code to send request for login
-			new LoginHandler().execute();
-			break;
-		case R.id.tv_reg_redirect:
-			finish();
-			Intent intent = new Intent(this, RegistrationActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.btn_forgotPass :
-			Intent i = new Intent(this , ForgotPassword.class);
-			startActivity(i);
-			break;
+		isInternetPresent = cd.isConnectingToInternet();
+		if (isInternetPresent) {
+			switch (v.getId()) {
+			case R.id.btn_login:
+				// Add code to send request for login
+				if(isValidated())
+					new LoginHandler().execute();
+					break;
+			case R.id.tv_reg_redirect:
+				finish();
+				Intent intent = new Intent(this, RegistrationActivity.class);
+				startActivity(intent);
+				break;
+			case R.id.btn_forgotPass:
+				Intent i = new Intent(this, ForgotPassword.class);
+				startActivity(i);
+				break;
+			}
+		} else {
+			Toast.makeText(this, "Internet Connection not available",
+					Toast.LENGTH_SHORT).show();
 		}
-
 	}
 
 	@Override
@@ -92,6 +97,20 @@ public class LoginActivity extends MyActivity {
 		} else {
 			rememberEditor.putBoolean("remember", false);
 			rememberEditor.commit();
+		}
+	}
+
+	public boolean isValidated() {
+
+		if (usrName.getText().toString().equalsIgnoreCase("")
+				|| !usrName.getText().toString()
+						.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
+				|| usrPass.getText().toString() == null) {
+			Toast.makeText(this, "Fields Cannot be left empty",
+					Toast.LENGTH_SHORT).show();
+			return false;
+		} else {
+			return true;
 		}
 	}
 
@@ -111,22 +130,18 @@ public class LoginActivity extends MyActivity {
 		@Override
 		protected Void doInBackground(Integer... arg0) {
 
-			try {
-				ParseUser.logIn(usrName.getText().toString(), usrPass.getText()
-						.toString());
-			} catch (ParseException e) {
-				e.printStackTrace();
-				isLoginSuccess = false;
-				Toast.makeText(LoginActivity.this,
-						"Something Wicked Happened !!", Toast.LENGTH_SHORT)
-						.show();
-			}catch(Exception e){
-				isLoginSuccess = false;
-				Toast.makeText(LoginActivity.this,
-						"Something Wicked Happened !!", Toast.LENGTH_SHORT)
-						.show();
+			isInternetPresent = cd.isConnectingToInternet();
+			if (isInternetPresent) {
+				try {
+					ParseUser.logIn(usrName.getText().toString(), usrPass
+							.getText().toString());
+				} catch (Exception e) {
+					isLoginSuccess = false;
+					Toast.makeText(LoginActivity.this,
+							"Something Wicked Happened !!", Toast.LENGTH_SHORT)
+							.show();
+				}
 			}
-
 			return null;
 		}
 

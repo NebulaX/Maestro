@@ -7,15 +7,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.parse.Parse;
 
 public class MyActivity extends SherlockActivity implements OnClickListener,
-		OnCheckedChangeListener {
+		OnCheckedChangeListener , OnItemSelectedListener {
 
 	public ConnectionDetector cd;
 	public Boolean isInternetPresent;
@@ -40,10 +41,10 @@ public class MyActivity extends SherlockActivity implements OnClickListener,
 		cd = new ConnectionDetector(getApplicationContext());
 		isInternetPresent = cd.isConnectingToInternet();
 
-		if (!isInternetPresent) {
-			Toast.makeText(this, "Unable to establish a connection",
-					Toast.LENGTH_LONG).show();
-		}
+//		if (!isInternetPresent) {
+//			Toast.makeText(this, "Unable to establish a connection",
+//					Toast.LENGTH_LONG).show();
+//		}
 
 		// Initialisation of Parse 
 		Parse.initialize(this, getResources().getString(R.string.APP_ID),
@@ -63,5 +64,14 @@ public class MyActivity extends SherlockActivity implements OnClickListener,
 
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+			long arg3) {		
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
 	}
 }
