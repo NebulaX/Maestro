@@ -53,48 +53,169 @@
             android:typeface="monospace" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
             android:orientation="horizontal" >
 
-            <LinearLayout
+            <CheckBox
+                android:id="@+id/check_student"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
-                android:layout_weight="1">
+                android:paddingRight="15dp" />
 
-                <CheckBox
-                    android:id="@+id/check_student"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_student_class"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Your Class"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinner_student_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/classArray"
+                android:prompt="@string/Student_spinner"
+                android:visibility="visible" />
+            <!-- Change the visibility of this layout in the java code -->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/check_maestro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Maestro"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_maestro_details"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Your Subject"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinner_maestro_subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/subjectArray"
+                android:prompt="@string/Maestro_spinner" />
+            <!-- Change the visibility of this layout in the java code -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:layout_marginTop="20dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Student"
+                    android:layout_weight="1"
+                    android:text="Class From"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Class To"
                     android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1" >
+                android:orientation="horizontal" >
 
-                <CheckBox
-                    android:id="@+id/check_maestro"
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:id="@+id/spinner_maestro_from"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingRight="15dp" />
+                    android:layout_weight="1"
+                    android:entries="@array/classArray"
+                    android:prompt="@string/Maestro_spinner_from" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:id="@+id/spinner_maestro_to"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Maestro"
-                    android:textSize="20sp" />
+                    android:layout_weight="1"
+                    android:entries="@array/classArray"
+                    android:prompt="@string/Maestro_spinner_to" />
             </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_detectLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="right"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/reg_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="Mobile Number"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:typeface="monospace" />
 
         <Button
             android:id="@+id/btn_register"
