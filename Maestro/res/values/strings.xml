@@ -6,5 +6,40 @@
     <string name="hello_world">Hello world!</string>
     <string name="APP_ID">0cWaJbJ9XGbvcrGCLIkYUQbEzbEqnwFE6gRZ4cxg</string>
     <string name="CLIENT_KEY">9JZBLuJhixnRtOHkPL5ybx4RRMTsc2VOmr2Qh0yd</string>
+    <string name="Student_spinner">Choose Your Class</string>
+    <string name="Maestro_spinner">Choose your Subject</string>
+    <string name="Maestro_spinner_from">Class from</string>
+    <string name="Maestro_spinner_to">Class to</string>
+    
+    <string-array name="classArray">
+        <item>Class I</item>
+        <item>Class II</item>
+        <item>Class III</item>
+        <item>Class IV</item>
+        <item>Class V</item>
+        <item>Class VI</item>
+        <item>Class VII</item>
+        <item>Class VIII</item>
+        <item>Class IX</item>
+        <item>Class X</item>
+        <item>Class XI</item>
+        <item>Class XII</item>
+    </string-array>
+    
+    <string-array name="subjectArray">
+        <item >English</item>
+        <item >Hindi</item>
+        <item >Maths</item>
+        <item >E.V.S</item>
+        <item >Social Studies</item>
+        <item >Science</item>
+        <item >Sanskrit</item>
+        <item >Physics</item>
+        <item >Chemistry</item>
+        <item >Accountancy</item>
+        <item >Business Studies</item>
+        <item >Political Science</item>
+        <item >History</item>
+    </string-array>
 
 </resources>
