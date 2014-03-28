@@ -1,8 +1,12 @@
 package in.co.nebulax.maestro;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
-
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -16,10 +20,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-public class RegistrationActivity extends MyActivity {
+public class RegistrationActivity extends MyActivity implements LocationListener {
 
 	EditText name, email, pass, confirmpass, mobile;
 	CheckBox student, maestro;
@@ -38,6 +45,8 @@ public class RegistrationActivity extends MyActivity {
 
 	String subject = "";
 	int from = 0, to = 0;
+	
+	LatLng latLng;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +109,7 @@ public class RegistrationActivity extends MyActivity {
 				break;
 
 			case R.id.btn_detectLocation:
-				tv_location.setText("User's location");
+				getLocation();
 				break;
 			}
 		} else {
@@ -222,6 +231,8 @@ public class RegistrationActivity extends MyActivity {
 			user.put("Subject", subject);
 			user.put("Class_from", from);
 			user.put("Class_to", to);
+			user.put("Mobile", mobile.getText().toString());
+			user.put("Location", "");
 
 			try {
 				user.signUp();
@@ -257,6 +268,69 @@ public class RegistrationActivity extends MyActivity {
 		finish();
 		Intent i = new Intent(this, LoginActivity.class);
 		startActivity(i);
+	}
+
+	public void getLocation() {
+
+		int status = GooglePlayServicesUtil
+				.isGooglePlayServicesAvailable(getBaseContext());
+
+		if (status != ConnectionResult.SUCCESS) {
+
+			int requestCode = 10;
+			Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this,
+					requestCode);
+			dialog.show();
+		}else {
+			
+			 // Getting LocationManager object from System Service LOCATION_SERVICE
+            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+ 
+            // Creating a criteria object to retrieve provider
+            Criteria criteria = new Criteria();
+ 
+            // Getting the name of the best provider
+            String provider = locationManager.getBestProvider(criteria, true);
+            
+            // Getting Current Location
+            Location location = locationManager.getLastKnownLocation(provider);
+ 
+            if(location!=null){
+                onLocationChanged(location);
+            }
+            locationManager.requestLocationUpdates(provider, 20000, 0, this);
+		}
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		
+		// Getting latitude of the current location
+        double latitude = location.getLatitude();
+ 
+        // Getting longitude of the current location
+        double longitude = location.getLongitude();
+ 
+        // Creating a LatLng object for the current location
+        latLng = new LatLng(latitude, longitude);
+        
+        tv_location.setText("Latitude : "+latitude + " Longitude : "+longitude);
+        
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		
 	}
 
 }
