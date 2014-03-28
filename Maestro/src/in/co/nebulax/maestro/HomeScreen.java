@@ -1,43 +1,65 @@
 package in.co.nebulax.maestro;
 
+import in.co.nebulax.maestro.utils.ConnectionDetector;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.parse.Parse;
 import com.parse.ParseUser;
 
-public class HomeScreen extends MyActivity {
+public class HomeScreen extends SherlockFragmentActivity implements
+		OnClickListener {
 
 	ParseUser currentUser;
-	TextView usrName;
 
-	Button logout;
+	public ConnectionDetector cd;
+	public Boolean isInternetPresent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);
 
 		initialiseFields();
 		setFields();
-		
-		usrName.setText(currentUser.getUsername());
-	}
-	
-	public void initialiseFields(){
 
-		usrName = (TextView) findViewById(R.id.tv_usrName);
-		logout = (Button) findViewById(R.id.btn_logout);
+		Parse.initialize(this, getResources().getString(R.string.APP_ID),
+				getResources().getString(R.string.CLIENT_KEY));
+
+		ActionBar actionBar = getSupportActionBar();
+
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setDisplayShowTitleEnabled(true);
+
+		Tab tab;
+		if (currentUser.getBoolean("isMaestro")) {
+			tab = actionBar.newTab().setText("Maestro Portal")
+					.setTabListener(new PortalMaestro())
+					.setIcon(R.drawable.ic_launcher);
+
+			actionBar.addTab(tab);
+		}
+
+		if (currentUser.getBoolean("isStudent")) {
+			tab = actionBar.newTab().setText("Student Portal")
+					.setTabListener(new PortalStudent())
+					.setIcon(R.drawable.ic_launcher);
+
+			actionBar.addTab(tab);
+		}
+	}
+
+	public void initialiseFields() {
 		currentUser = ParseUser.getCurrentUser();
-		
 	}
-	
-	public void setFields(){
 
-		logout.setOnClickListener(this);		
+	public void setFields() {
 	}
 
 	@Override
