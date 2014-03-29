@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
@@ -27,7 +29,6 @@ public class HomeScreen extends SherlockFragmentActivity implements
 		//setContentView(R.layout.activity_main);
 
 		initialiseFields();
-		setFields();
 
 		Parse.initialize(this, getResources().getString(R.string.APP_ID),
 				getResources().getString(R.string.CLIENT_KEY));
@@ -59,9 +60,6 @@ public class HomeScreen extends SherlockFragmentActivity implements
 		currentUser = ParseUser.getCurrentUser();
 	}
 
-	public void setFields() {
-	}
-
 	@Override
 	public void onClick(View v) {
 		isInternetPresent = cd.isConnectingToInternet();
@@ -75,4 +73,17 @@ public class HomeScreen extends SherlockFragmentActivity implements
 					Toast.LENGTH_SHORT).show();
 		}
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		return super.onOptionsItemSelected(item);
+	}
+	
+	
 }
