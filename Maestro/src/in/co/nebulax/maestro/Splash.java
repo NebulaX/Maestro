@@ -18,7 +18,7 @@ public class Splash extends MyActivity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_splash);
-		
+
 		getSupportActionBar().hide();
 
 		Thread timer = new Thread() {
@@ -28,16 +28,17 @@ public class Splash extends MyActivity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				} finally {
-					if(isRemembered == true){
-					ParseUser user = ParseUser.getCurrentUser();
-					if (user != null) {
-						Intent i = new Intent(Splash.this, HomeScreen.class);
-						startActivity(i);
+					if (isRemembered == true) {
+						ParseUser user = ParseUser.getCurrentUser();
+						if (user != null) {
+							Intent i = new Intent(Splash.this, HomeScreen.class);
+							startActivity(i);
+						} else {
+							Intent i = new Intent(Splash.this,
+									LoginActivity.class);
+							startActivity(i);
+						}
 					} else {
-						Intent i = new Intent(Splash.this, LoginActivity.class);
-						startActivity(i);
-					}
-					}else{
 						Intent i = new Intent(Splash.this, LoginActivity.class);
 						startActivity(i);
 					}

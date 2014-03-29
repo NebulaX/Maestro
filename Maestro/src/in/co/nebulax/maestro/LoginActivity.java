@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 public class LoginActivity extends MyActivity {
@@ -66,8 +67,13 @@ public class LoginActivity extends MyActivity {
 			switch (v.getId()) {
 			case R.id.btn_login:
 				// Add code to send request for login
-				if(isValidated())
+				if(isValidated()){
+					ParseInstallation curInstallation = ParseInstallation
+							.getCurrentInstallation();
+					curInstallation.add("username", usrName.getText().toString());
+					curInstallation.saveInBackground();
 					new LoginHandler().execute();
+				}
 					break;
 			case R.id.tv_reg_redirect:
 				finish();

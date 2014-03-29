@@ -224,7 +224,6 @@ public class RegistrationActivity extends MyActivity implements
 			user.setUsername(email.getText().toString());
 			user.setPassword(pass.getText().toString());
 			user.setEmail(email.getText().toString());
-
 			// other fields can be set just like with ParseObject
 			user.put("Name", name.getText().toString());
 			user.put("isStudent", isStudent);
@@ -235,7 +234,6 @@ public class RegistrationActivity extends MyActivity implements
 			user.put("Class_to", to);
 			user.put("Mobile", mobile.getText().toString());
 			user.put("Location", tv_location.getText().toString());
-
 			try {
 				user.signUp();
 			} catch (ParseException e) {
