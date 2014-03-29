@@ -49,16 +49,17 @@
                 android:prompt="@string/Maestro_spinner" />
 
             <EditText
+                android:layout_marginTop="20dp"
                 android:id="@+id/fragStudent_topic_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter topic/chapter name"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:typeface="serif"
-                android:layout_margin="20dp" />
+                android:typeface="serif" />
 
             <Button
+                android:layout_marginTop="20dp"
                 android:id="@+id/fragStudent_btn_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
