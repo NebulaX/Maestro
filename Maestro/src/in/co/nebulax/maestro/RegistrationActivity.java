@@ -62,7 +62,7 @@ public class RegistrationActivity extends MyActivity implements
 
 		initialiseFields();
 		setFields();
-		getLocation();
+		// getLocation();
 	}
 
 	public void initialiseFields() {
@@ -83,6 +83,8 @@ public class RegistrationActivity extends MyActivity implements
 		spinner_to = (Spinner) findViewById(R.id.spinner_maestro_to);
 		spinner_subject = (Spinner) findViewById(R.id.spinner_maestro_subject);
 		mobile = (EditText) findViewById(R.id.reg_mobile);
+		
+		tv_location.setText("Roorkee");
 	}
 
 	private void setFields() {
@@ -233,7 +235,7 @@ public class RegistrationActivity extends MyActivity implements
 			user.put("Class_from", from);
 			user.put("Class_to", to);
 			user.put("Mobile", mobile.getText().toString());
-			user.put("Location", tv_location.getText().toString());
+			user.put("Location", "Roorkee");
 			try {
 				user.signUp();
 			} catch (ParseException e) {
