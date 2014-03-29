@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:hint="Username"
             android:maxLines="1"
+            android:inputType="textEmailAddress"
             android:paddingTop="10dp"
             android:singleLine="true"
             android:typeface="serif" />
@@ -75,8 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:text="Forgot Password"
-            android:textSize="20sp" />
+            android:textSize="20sp" 
+            android:src="@drawable/ic_launcher"/>
     </LinearLayout>
 
 </ScrollView>
