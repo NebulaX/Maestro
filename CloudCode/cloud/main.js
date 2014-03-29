@@ -15,8 +15,11 @@ Parse.Cloud.define("maestroRequest" , function(request , response) {
 	var query = new Parse.Query("User");
 	query.equalTo("objectId" , request.params.objectId);
 	query.find({
-		success:function(){
-			response.success("Got It !!");
+		success:function(result){
+			if(result.length==0)
+				response.success("Not found");
+			else
+				response.success("Found !!");
 		},
 		error:function(){
 			response.error("Oops !!");
