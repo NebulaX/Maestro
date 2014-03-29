@@ -70,8 +70,10 @@ public class LoginActivity extends MyActivity {
 				if(isValidated()){
 					ParseInstallation curInstallation = ParseInstallation
 							.getCurrentInstallation();
-					curInstallation.add("username", usrName.getText().toString());
+					curInstallation.remove("username");
+					curInstallation.add("username", usrName.getText().toString());					
 					curInstallation.saveInBackground();
+					
 					new LoginHandler().execute();
 				}
 					break;
