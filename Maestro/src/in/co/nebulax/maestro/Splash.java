@@ -19,7 +19,7 @@ public class Splash extends MyActivity {
 
 		setContentView(R.layout.activity_splash);
 
-		getSupportActionBar().hide();
+	//	getSupportActionBar().hide();
 
 		Thread timer = new Thread() {
 			public void run() {

@@ -162,7 +162,7 @@ public class LoginActivity extends MyActivity {
 			if (isLoginSuccess) {
 				finish();
 				Intent intent = new Intent(LoginActivity.this, HomeScreen.class);
-				startActivity(intent);
+				startActivity(intent); 
 			}
 		}
 

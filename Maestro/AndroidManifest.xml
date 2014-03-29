@@ -30,6 +30,7 @@
     <uses-permission android:name="in.co.nebulax.maestro.permission.C2D_MESSAGE" />
 
     <application
+        android:name="in.co.nebulax.maestro.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"

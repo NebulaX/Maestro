@@ -12,7 +12,6 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.parse.Parse;
 import com.parse.ParseUser;
 
 public class HomeScreen extends SherlockFragmentActivity implements
@@ -30,9 +29,12 @@ public class HomeScreen extends SherlockFragmentActivity implements
 
 		initialiseFields();
 
-		Parse.initialize(this, getResources().getString(R.string.APP_ID),
-				getResources().getString(R.string.CLIENT_KEY));
-
+//		try{
+//		Parse.initialize(this, getResources().getString(R.string.APP_ID),
+//				getResources().getString(R.string.CLIENT_KEY));
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
 		ActionBar actionBar = getSupportActionBar();
 
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -84,8 +86,8 @@ public class HomeScreen extends SherlockFragmentActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
 		switch(item.getItemId()){
-		case R.id.action_change_profile :
-			break;
+//		case R.id.action_change_profile :
+//			break;
 		case R.id.action_logout :
 			ParseUser.logOut();
 			finish();

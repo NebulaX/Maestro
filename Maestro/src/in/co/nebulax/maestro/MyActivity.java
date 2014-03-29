@@ -13,9 +13,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.parse.Parse;
-import com.parse.ParseUser;
-import com.parse.PushService;
 
 public class MyActivity extends SherlockActivity implements OnClickListener,
 		OnCheckedChangeListener, OnItemSelectedListener {
@@ -48,23 +45,12 @@ public class MyActivity extends SherlockActivity implements OnClickListener,
 		// Toast.LENGTH_LONG).show();
 		// }
 
-		// Initialisation of Parse
-		Parse.initialize(this, getResources().getString(R.string.APP_ID),
-				getResources().getString(R.string.CLIENT_KEY));
-
 		// Initialisation of shared Prefs
 
 		remeberData = getSharedPreferences(radio, 0);
 		rememberEditor = remeberData.edit();
 		isRemembered = remeberData.getBoolean("remember", false);
 		Log.v("isRemembered", "In MyActivity : " + isRemembered);
-
-		ParseUser currUser = ParseUser.getCurrentUser();
-		if (currUser != null) {
-			PushService.setDefaultPushCallback(this, HomeScreen.class);
-		} else {
-			PushService.setDefaultPushCallback(this, LoginActivity.class);
-		}
 	}
 
 	@Override

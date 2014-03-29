@@ -84,7 +84,7 @@ public class RegistrationActivity extends MyActivity implements
 		spinner_subject = (Spinner) findViewById(R.id.spinner_maestro_subject);
 		mobile = (EditText) findViewById(R.id.reg_mobile);
 		
-		tv_location.setText("Roorkee");
+		tv_location.setText("Location : Roorkee");
 	}
 
 	private void setFields() {
