@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "Maestro": {
+            "applicationId": "0cWaJbJ9XGbvcrGCLIkYUQbEzbEqnwFE6gRZ4cxg", 
+            "masterKey": "Emsbv3JdyXjrbrYRIK1KqI7TGHHJrWK7jBYOTOuG"
+        }, 
+        "_default": {
+            "link": "Maestro"
+        }
+    }
+}
