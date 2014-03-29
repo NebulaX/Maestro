@@ -234,7 +234,7 @@ public class RegistrationActivity extends MyActivity implements
 			user.put("Class_from", from);
 			user.put("Class_to", to);
 			user.put("Mobile", mobile.getText().toString());
-			user.put("Location", "");
+			user.put("Location", tv_location.getText().toString());
 
 			try {
 				user.signUp();
