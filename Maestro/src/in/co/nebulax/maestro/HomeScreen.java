@@ -42,7 +42,7 @@ public class HomeScreen extends SherlockFragmentActivity implements
 
 		Tab tab;
 		if (currentUser.getBoolean("isMaestro")) {
-			tab = actionBar.newTab().setText("Maestro Portal")
+			tab = actionBar.newTab().setText("Maestro Console")
 					.setTabListener(new PortalMaestro())
 					.setIcon(R.drawable.ic_launcher);
 
@@ -50,7 +50,7 @@ public class HomeScreen extends SherlockFragmentActivity implements
 		}
 
 		if (currentUser.getBoolean("isStudent")) {
-			tab = actionBar.newTab().setText("Student Portal")
+			tab = actionBar.newTab().setText("Student Console")
 					.setTabListener(new PortalStudent())
 					.setIcon(R.drawable.ic_launcher);
 
