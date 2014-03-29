@@ -82,8 +82,16 @@ public class HomeScreen extends SherlockFragmentActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch(item.getItemId()){
+		case R.id.action_change_profile :
+			break;
+		case R.id.action_logout :
+			ParseUser.logOut();
+			finish();
+			Intent i = new Intent(this , LoginActivity.class);
+			startActivity(i);
+		}		
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
 }
