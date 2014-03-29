@@ -1,9 +1,13 @@
 package in.co.nebulax.maestro;
 
 import in.co.nebulax.maestro.utils.ConnectionDetector;
+
+import java.util.HashMap;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +23,10 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragment;
+import com.parse.FunctionCallback;
 import com.parse.Parse;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -57,6 +64,15 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 
 		initialiseFields();
 		setFields();
+		
+		ParseCloud.callFunctionInBackground("hello", new HashMap<String, Object>(), new FunctionCallback<String>() {
+			  public void done(String result, ParseException e) {
+			    if (e == null) {
+			      Log.v("Cloud" , result);
+			    }
+			  }
+			});
+		
 		return v;
 	}
 
