@@ -64,15 +64,7 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 
 		initialiseFields();
 		setFields();
-		
-		ParseCloud.callFunctionInBackground("hello", new HashMap<String, Object>(), new FunctionCallback<String>() {
-			  public void done(String result, ParseException e) {
-			    if (e == null) {
-			      Log.v("Cloud" , result);
-			    }
-			  }
-			});
-		
+
 		return v;
 	}
 
@@ -108,7 +100,7 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 		});
 
 		subject_select.setOnItemSelectedListener(this);
-		
+
 		submit.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -119,10 +111,24 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 					request.put("StudentId", currUser.getObjectId());
 					request.put("Subject", subject);
 					request.put("Topic", topic_name.getText().toString());
-					request.put("Status",0) ;
+					request.put("Status", 0);
 					request.saveEventually();
 					Toast.makeText(getSherlockActivity(), "Request Recieved",
 							Toast.LENGTH_SHORT).show();
+
+					// Add a call to cloud function to search for suitable
+					// maestro
+
+					HashMap<String, Object> params = new HashMap<String, Object>();
+					params.put("objectId", currUser.getObjectId());
+					ParseCloud.callFunctionInBackground("maestroRequest",
+							params, new FunctionCallback<String>() {
+								public void done(String result, ParseException e) {
+									if (e == null) {
+										Log.v("Cloud" , result.toString());										
+									}
+								}
+							});
 				}
 			}
 		});
