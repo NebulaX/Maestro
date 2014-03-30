@@ -11,6 +11,4 @@ Open Community learning
 
 ###License
 
-Artistic 2.0
-
-Copyright (C) 2014 NebulaX
+MIT
