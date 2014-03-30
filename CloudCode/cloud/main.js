@@ -12,17 +12,72 @@ Parse.Cloud.define("hello", function(request, response) {
 
 Parse.Cloud.define("maestroRequest" , function(request , response) {
 
-	var query = new Parse.Query("User");
-	query.equalTo("objectId" , request.params.objectId);
-	query.find({
+	var User = Parse.Object.extend("User");
+	var RequestLog = Parse.Object.extend("RequestLog");
+	var Installation = Parse.Object.extend("Installation");
+	var studentDetails = new Parse.Query(User);
+	var maestroDetails = new Parse.Query(User);
+	var pushQuery = new Parse.Query(Installation);
+	var maestroUsername;
+
+	ObjectId = request.params.ObjectId;
+	Subject  = request.params.Subject;
+	Topic    = request.params.Topic;
+	Place    = request.params.Place;
+
+	studentDetails.equalTo("objectId", ObjectId);
+	studentDetails.find({
 		success:function(result){
-			if(result.length==0)
-				response.success("Not found");
-			else
-				response.success("Found !!");
+			if(result.length!=1){
+				response.success("something is fishy");
+			}
+			else{
+				info = result[0];
+				email        = info.get("username");
+				studentName  = info.get("Name");
+				studentClass = info.get("studentClass");
+				mobile       = info.get("Mobile");
+			}
 		},
 		error:function(){
-			response.error("Oops !!");
+			response.error("Oops !! Could not connect with server");
+		}
+	});
+
+	maestroDetails.equalTo("isMaestro", true).equalTo("Subject", Subject).equalTo("Location", Place);
+	maestroDetails.find({
+		success:function(result){
+			if(result.length==0){
+				response.success("Sorry !! None of the maestros satisfy your conditions");
+			}
+			else{
+				maestroUsername = result[0].get("username").toString();
+				pushQuery.equalTo("username", maestroUsername);
+				Parse.Push.send({
+					where: pushQuery,
+					data: {
+						alert    : "We have a job for you.",
+						action   : "in.co.nebulax.maestro.UPDATE_STATUS",
+						name     : studentName.toString(),
+						email    : email.toString(),
+						topic    : Topic.toString() + ", Class-" + studentClass.toString(),
+						city     : Place.toString(),
+						mobile   : mobile.toString(),
+					}
+				}, {
+					success: function() {
+						// Push was successful
+						response.success("Push notification sent.");
+					},
+					error: function(error) {
+						// Handle error
+						response.error("Oops !! Could not make the push.")
+					}
+				});
+			}
+		},
+		error:function(){
+			response.error("Oops !! Could not connect with server");
 		}
 	});
 });
