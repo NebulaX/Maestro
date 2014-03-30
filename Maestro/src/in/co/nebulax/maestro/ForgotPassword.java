@@ -1,20 +1,20 @@
 package in.co.nebulax.maestro;
 
-import com.parse.ParseException;
-import com.parse.ParseUser;
-
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 public class ForgotPassword extends MyActivity {
 
 	EditText usrname;
-	Button submit;
+	ImageButton submit;
 	boolean resetSuccess = true;
 	
 	@Override
@@ -23,7 +23,7 @@ public class ForgotPassword extends MyActivity {
 		setContentView(R.layout.activity_forgotpassword);
 		
 		usrname = (EditText) findViewById(R.id.forgot_username);
-		submit = (Button) findViewById(R.id.btn_forgotpass_submit);
+		submit = (ImageButton) findViewById(R.id.btn_forgotpass_submit);
 
 		submit.setOnClickListener(this);
 	}

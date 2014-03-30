@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:scrollbars="none" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="30dp" >
+        android:padding="20dp" >
 
         <TextView
             android:id="@+id/fragStudent_tv_name"
@@ -17,13 +18,14 @@
 
         <!-- Add textView for display of quotation -->
 
-        <Button
+        <ImageButton
             android:id="@+id/fragStudent_btn_tutRequest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:text="Request Maestro" />
+            android:background="@null"
+            android:src="@drawable/reqest" />
 
         <LinearLayout
             android:id="@+id/fragStudent_ll_tut_request"
@@ -36,8 +38,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:gravity="center_horizontal"
+                android:background="@drawable/location_back"
+                android:gravity="center"
                 android:text="Choose Subject"
+                android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
             <Spinner
@@ -49,22 +53,23 @@
                 android:prompt="@string/Maestro_spinner" />
 
             <EditText
-                android:layout_marginTop="20dp"
                 android:id="@+id/fragStudent_topic_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:hint="Enter topic/chapter name"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:typeface="serif" />
 
-            <Button
-                android:layout_marginTop="20dp"
+            <ImageButton
                 android:id="@+id/fragStudent_btn_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Submit" />
+                android:layout_marginTop="30dp"
+                android:background="@null"
+                android:src="@drawable/submit" />
         </LinearLayout>
     </LinearLayout>
 

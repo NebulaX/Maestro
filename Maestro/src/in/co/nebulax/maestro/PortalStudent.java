@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,7 +24,6 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.parse.FunctionCallback;
-import com.parse.Parse;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -37,7 +36,7 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 
 	ParseUser currUser;
 	TextView tv_usrName;
-	Button btn_requestTutor, submit;
+	ImageButton submit, btn_requestTutor;
 	LinearLayout requestBuilder;
 	Spinner subject_select;
 
@@ -58,10 +57,6 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 
 		v = inflater.inflate(R.layout.fragment_student, container, false);
 
-		Parse.initialize(getSherlockActivity(),
-				getResources().getString(R.string.APP_ID), getResources()
-						.getString(R.string.CLIENT_KEY));
-
 		initialiseFields();
 		setFields();
 
@@ -72,7 +67,7 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 
 		// Initialising fields
 		tv_usrName = (TextView) v.findViewById(R.id.fragStudent_tv_name);
-		btn_requestTutor = (Button) v
+		btn_requestTutor = (ImageButton) v
 				.findViewById(R.id.fragStudent_btn_tutRequest);
 
 		requestBuilder = (LinearLayout) v
@@ -85,7 +80,7 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 		tv_usrName.setText("Hi " + currUser.getString("Name"));
 
 		topic_name = (EditText) v.findViewById(R.id.fragStudent_topic_name);
-		submit = (Button) v.findViewById(R.id.fragStudent_btn_submit);
+		submit = (ImageButton) v.findViewById(R.id.fragStudent_btn_submit);
 	}
 
 	public void setFields() {
@@ -112,20 +107,24 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 					request.put("Subject", subject);
 					request.put("Topic", topic_name.getText().toString());
 					request.put("Status", 0);
-					request.saveEventually();
-					Toast.makeText(getSherlockActivity(), "Request Recieved",
-							Toast.LENGTH_SHORT).show();
+					request.saveInBackground();
 
 					// Add a call to cloud function to search for suitable
 					// maestro
 
 					HashMap<String, Object> params = new HashMap<String, Object>();
-					params.put("objectId", currUser.getObjectId());
+					params.put("ObjectId", currUser.getObjectId());
+					params.put("Subject", subject);
+					params.put("Topic", topic_name.getText().toString());
+					params.put("Place", "Roorkee");
 					ParseCloud.callFunctionInBackground("maestroRequest",
 							params, new FunctionCallback<String>() {
 								public void done(String result, ParseException e) {
 									if (e == null) {
-										Log.v("Cloud" , result.toString());										
+										Log.v("Cloud", result.toString());
+										Toast.makeText(getSherlockActivity(),
+												"Request Sent",
+												Toast.LENGTH_LONG).show();
 									}
 								}
 							});
@@ -164,7 +163,6 @@ public class PortalStudent extends SherlockFragment implements TabListener,
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
 
 	}
 

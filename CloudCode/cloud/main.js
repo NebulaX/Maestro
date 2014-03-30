@@ -26,3 +26,13 @@ Parse.Cloud.define("maestroRequest" , function(request , response) {
 		}
 	});
 });
+
+/*var query = new Parse.Query(Parse.Installation);
+query.equalTo('gender', 'male');
+
+Parse.Push.send({
+  where: query, // Set our Installation query
+  data: {
+    alert: "A test notification from Parse!"
+  }
+});*/

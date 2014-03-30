@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,8 @@ public class LoginActivity extends MyActivity {
 
 	EditText usrName;
 	EditText usrPass;
-	Button btnLogin, forgotPass;
+	ImageButton btnLogin, btnRegister, btnForgot;
+	Button forgotPass;
 	TextView reg_redirect;
 	CheckBox rememberMe;
 	boolean isLoginSuccess = true;
@@ -39,18 +41,20 @@ public class LoginActivity extends MyActivity {
 
 		usrName = (EditText) findViewById(R.id.login_username);
 		usrPass = (EditText) findViewById(R.id.login_password);
-		btnLogin = (Button) findViewById(R.id.btn_login);
-		reg_redirect = (TextView) findViewById(R.id.tv_reg_redirect);
-		forgotPass = (Button) findViewById(R.id.btn_forgotPass);
+		btnLogin = (ImageButton) findViewById(R.id.btn_login);
+		// reg_redirect = (TextView) findViewById(R.id.tv_reg_redirect);
+		btnForgot = (ImageButton) findViewById(R.id.btn_forgot_pass);
 		rememberMe = (CheckBox) findViewById(R.id.check_rememberMe);
+		btnRegister = (ImageButton) findViewById(R.id.login_btn_register);
+
 	}
 
 	private void setFields() {
 		btnLogin.setOnClickListener(this);
-		reg_redirect.setOnClickListener(this);
-		forgotPass.setOnClickListener(this);
+		btnRegister.setOnClickListener(this);
+		// reg_redirect.setOnClickListener(this);
 		rememberMe.setOnCheckedChangeListener(this);
-
+		btnForgot.setOnClickListener(this);
 		// Setting initial state of checkbox
 
 		if (isRemembered == true)
@@ -67,24 +71,25 @@ public class LoginActivity extends MyActivity {
 			switch (v.getId()) {
 			case R.id.btn_login:
 				// Add code to send request for login
-				if(isValidated()){
+				if (isValidated()) {
 					ParseInstallation curInstallation = ParseInstallation
 							.getCurrentInstallation();
 					curInstallation.remove("username");
-					curInstallation.add("username", usrName.getText().toString());					
+					curInstallation.add("username", usrName.getText()
+							.toString());
 					curInstallation.saveInBackground();
-					
+
 					new LoginHandler().execute();
 				}
-					break;
-			case R.id.tv_reg_redirect:
+				break;
+			case R.id.login_btn_register:
 				finish();
 				Intent intent = new Intent(this, RegistrationActivity.class);
 				startActivity(intent);
 				break;
-			case R.id.btn_forgotPass:
-				Intent i = new Intent(this, ForgotPassword.class);
-				startActivity(i);
+			case R.id.btn_forgot_pass:
+				Intent in = new Intent(this, ForgotPassword.class);
+				startActivity(in);
 				break;
 			}
 		} else {
@@ -145,9 +150,9 @@ public class LoginActivity extends MyActivity {
 							.getText().toString());
 				} catch (Exception e) {
 					isLoginSuccess = false;
-					Toast.makeText(LoginActivity.this,
-							"Something Wicked Happened !!", Toast.LENGTH_SHORT)
-							.show();
+					// Toast.makeText(LoginActivity.this,
+					// "Something Wicked Happened !!", Toast.LENGTH_SHORT)
+					// .show();
 				}
 			}
 			return null;
@@ -162,7 +167,11 @@ public class LoginActivity extends MyActivity {
 			if (isLoginSuccess) {
 				finish();
 				Intent intent = new Intent(LoginActivity.this, HomeScreen.class);
-				startActivity(intent); 
+				startActivity(intent);
+			} else {
+				Toast.makeText(LoginActivity.this,
+						"Something Wicked Happened !!", Toast.LENGTH_SHORT)
+						.show();
 			}
 		}
 

@@ -17,10 +17,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,7 +37,7 @@ public class RegistrationActivity extends MyActivity implements
 
 	EditText name, email, pass, confirmpass, mobile;
 	CheckBox student, maestro;
-	Button register;
+	ImageButton register , login;
 	TextView redirect_login, tv_location;
 	boolean isRegSuccess = true;
 
@@ -73,7 +73,8 @@ public class RegistrationActivity extends MyActivity implements
 		confirmpass = (EditText) findViewById(R.id.reg_password_confirm);
 		student = (CheckBox) findViewById(R.id.check_student);
 		maestro = (CheckBox) findViewById(R.id.check_maestro);
-		register = (Button) findViewById(R.id.btn_register);
+		register = (ImageButton) findViewById(R.id.reg_btn_register);
+		login = (ImageButton) findViewById(R.id.reg_btn_login);
 		redirect_login = (TextView) findViewById(R.id.tv_login_redirect);
 		stuClass = (LinearLayout) findViewById(R.id.layout_student_class);
 		maestroDetails = (LinearLayout) findViewById(R.id.layout_maestro_details);
@@ -84,11 +85,11 @@ public class RegistrationActivity extends MyActivity implements
 		spinner_subject = (Spinner) findViewById(R.id.spinner_maestro_subject);
 		mobile = (EditText) findViewById(R.id.reg_mobile);
 		
-		tv_location.setText("Location : Roorkee");
 	}
 
 	private void setFields() {
 		register.setOnClickListener(this);
+		login.setOnClickListener(this);
 		redirect_login.setOnClickListener(this);
 
 		student.setOnCheckedChangeListener(this);
@@ -106,13 +107,16 @@ public class RegistrationActivity extends MyActivity implements
 		isInternetPresent = cd.isConnectingToInternet();
 		if (isInternetPresent) {
 			switch (v.getId()) {
-			case R.id.btn_register:
+			case R.id.reg_btn_register:
 				// Send request to register
 				if (isValidated())
 					new RegistrationHandler().execute();
 				break;
 
 			case R.id.tv_login_redirect:
+				showLoginActivity();
+				break;
+			case R.id.reg_btn_login :
 				showLoginActivity();
 				break;
 			}
@@ -131,6 +135,7 @@ public class RegistrationActivity extends MyActivity implements
 				isStudent = true;
 				stuClass.setVisibility(View.VISIBLE);
 			} else {
+				studentClass = 0;
 				isStudent = false;
 				stuClass.setVisibility(View.GONE);
 			}
@@ -193,9 +198,9 @@ public class RegistrationActivity extends MyActivity implements
 			Toast.makeText(RegistrationActivity.this, "Password Mismatch",
 					Toast.LENGTH_SHORT).show();
 			return false;
-		} else if (sMobile.equalsIgnoreCase("")
-				|| !sMobile
-						.matches("^((\\+){0,1}91(\\s){0,1}(\\-){0,1}(\\s){0,1}){0,1}9[0-9](\\s){0,1}(\\-){0,1}(\\s){0,1}[1-9]{1}[0-9]{7}$")) {
+		} else if (sMobile.equalsIgnoreCase("")){
+//				|| !sMobile
+//						.matches("^((\\+){0,1}91(\\s){0,1}(\\-){0,1}(\\s){0,1}){0,1}9[0-9](\\s){0,1}(\\-){0,1}(\\s){0,1}[1-9]{1}[0-9]{7}$")) {
 			Toast.makeText(RegistrationActivity.this,
 					"Enter proper mobile number", Toast.LENGTH_SHORT).show();
 			return false;

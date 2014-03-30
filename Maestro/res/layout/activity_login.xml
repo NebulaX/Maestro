@@ -3,20 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp" >
+    android:padding="20dp"
+    android:scrollbars="none" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+        
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/info"
+            ></LinearLayout>
 
         <EditText
             android:id="@+id/login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
-            android:maxLines="1"
+            android:hint="Email"
             android:inputType="textEmailAddress"
+            android:maxLines="1"
             android:paddingTop="10dp"
             android:singleLine="true"
             android:typeface="serif" />
@@ -52,32 +59,40 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:text="LOGIN"
-            android:textSize="20sp" />
+            android:background="@null"
+            android:src="@drawable/login" />
+
+        <ImageButton
+            android:id="@+id/btn_forgot_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:src="@drawable/forgot" />
 
         <TextView
-            android:id="@+id/tv_reg_redirect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:gravity="center_horizontal"
-            android:text="New user ?\nRegister here"
-            android:textSize="25sp" />
+            android:text="New user ?"
+            android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/btn_forgotPass"
+        <ImageButton
+            android:id="@+id/login_btn_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:textSize="20sp" 
-            android:src="@drawable/ic_launcher"/>
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:src="@drawable/register" />
     </LinearLayout>
 
 </ScrollView>
